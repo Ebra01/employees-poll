@@ -13,8 +13,12 @@ function Poll() {
 
   return (
     <div>
-      <h4>Would You Rather?</h4>
-      {userHasAnswered ? <PollResult id={id} /> : <PollVote id={id} />}
+    <h2 data-testid="poll-title" className="card-title text-center mb-5">Would You Rather?</h2>
+    <div className="card mb-4 shadow-sm">
+      <div className="card-body">
+        {userHasAnswered ? <PollResult id={id} /> : <PollVote id={id} />}
+      </div>
+    </div>
     </div>
   );
 }

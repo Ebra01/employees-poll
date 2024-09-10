@@ -8,6 +8,7 @@ import NavBar from './NavBar';
 import Leaderboard from './Leaderboard';
 import Poll from './Poll';
 import NewPoll from './NewPoll'
+import UserProfile from './UserProfile';
 
 function App() {
   const dispatch = useDispatch();
@@ -19,8 +20,8 @@ function App() {
 
   return (
     <Router>
-      <div>
-        <NavBar />
+      <NavBar />
+      <div className='container mt-5'>
         {authedUser === null ? (
           <Login />
         ) : (
@@ -29,6 +30,7 @@ function App() {
             <Route exact path="/add" element={<NewPoll />} />
             <Route exact path="/leaderboard" element={<Leaderboard />} />
             <Route exact path="/questions/:id" element={<Poll />} />
+            <Route exact path="/user/:id" element={<UserProfile />} />
           </Routes>
         )}
       </div>

@@ -1,0 +1,30 @@
+/* NewPoll.css */
+
+.container {
+  max-width: 600px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.form-group label {
+  font-weight: 500;
+}
+
+.form-control {
+  border-radius: 4px;
+}
+
+.btn-primary {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 10px;
+}
