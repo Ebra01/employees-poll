@@ -9,6 +9,7 @@ import Leaderboard from './Leaderboard';
 import Poll from './Poll';
 import NewPoll from './NewPoll'
 import UserProfile from './UserProfile';
+import NotFound from './NotFound';
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
             <Route exact path="/leaderboard" element={<Leaderboard />} />
             <Route exact path="/questions/:id" element={<Poll />} />
             <Route exact path="/user/:id" element={<UserProfile />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         )}
       </div>

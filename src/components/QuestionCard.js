@@ -8,7 +8,6 @@ function QuestionCard({ id, poll_status }) {
   return (
     <div className="card mb-3 p-3 text-center">
       <div className="d-flex flex-column align-items-center">
-        {/* User avatar */}
         <img 
           src={user.avatarURL} 
           alt={user.name} 
