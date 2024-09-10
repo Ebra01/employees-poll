@@ -13,14 +13,17 @@ function Dashboard() {
   };
 
   // Separate answered and unanswered polls
-  const answeredPolls = Object.keys(questions).filter(qid =>
+  const answeredPolls = Object.keys(questions)
+  .filter(qid =>
     questions[qid].optionOne.votes.includes(authedUser) ||
     questions[qid].optionTwo.votes.includes(authedUser)
-  );
+  )
+  .sort((a, b) => questions[b].timestamp - questions[a].timestamp); // Sort by date created
 
-  const unansweredPolls = Object.keys(questions).filter(qid =>
-    !answeredPolls.includes(qid)
-  );
+  const unansweredPolls = Object.keys(questions)
+  .filter(qid => !answeredPolls.includes(qid))
+  .sort((a, b) => questions[b].timestamp - questions[a].timestamp); // Sort by date created
+
 
   return (
     <div className="container mt-4">
