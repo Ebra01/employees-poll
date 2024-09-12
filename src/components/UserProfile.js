@@ -1,15 +1,26 @@
 // UserProfile.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import UserCard from './UserCard';
-import { useParams } from 'react-router-dom';
+import NotFound from "./NotFound"
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function UserProfile() {
   const {id} = useParams();
   const users = useSelector((state) => state.users);
+  const authedUser = useSelector((state) => state.authedUser);
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (authedUser == null || authedUser === undefined) {
+      navigate("/login", { state: {from: location.pathname}});
+    }
+  }, [navigate, location, authedUser])
+
   const user = users[id];
   if (!user) {
-    return <div>User not found</div>;
+    return <NotFound/>;
   }
 
   return (

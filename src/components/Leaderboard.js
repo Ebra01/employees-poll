@@ -1,8 +1,18 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Leaderboard() {
   const authedUser = useSelector((state) => state.authedUser);
   const users = useSelector((state) => state.users);
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (authedUser == null || authedUser === undefined) {
+      navigate("/login", { state: {from: location.pathname}});
+    }
+  }, [navigate, location, authedUser])
 
   const sortedUsers = Object.values(users).sort((a, b) => {
     const scoreA = Object.keys(a.answers).length + a.questions.length;

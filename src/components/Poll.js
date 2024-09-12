@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PollVote from './PollVote';
 import PollResult from './PollResult';
@@ -10,14 +10,18 @@ function Poll() {
   const question = useSelector((state) => state.questions[id]);
   const authedUser = useSelector((state) => state.authedUser);
   const user = useSelector((state) => state.users[question?.author]);
+  const location = useLocation();
+
+    useEffect(() => {
+      if (question === undefined) {
+        navigate("/404")
+      }
+      if (authedUser == null || authedUser === undefined) {
+        navigate("/login", { state: {from: location.pathname}});
+      }
+    }, [authedUser, question, location, navigate]);
 
   const userHasAnswered = question?.optionOne.votes.includes(authedUser) || question?.optionTwo.votes.includes(authedUser);
-
-  useEffect(() => {
-    if (question === undefined) {
-      navigate("/404")
-    }
-  }, [question, navigate]);
 
   return (
     <div>

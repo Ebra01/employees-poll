@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { handleAddQuestion } from '../actions/shared';
 import '../static/NewPoll.css'; // Import the custom CSS file
 
@@ -10,6 +10,13 @@ function NewPoll() {
   const authedUser = useSelector((state) => state.authedUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (authedUser == null || authedUser === undefined) {
+      navigate("/login", { state: {from: location.pathname}});
+    }
+  }, [navigate, location, authedUser])
 
   const handleSubmit = (e) => {
     e.preventDefault();

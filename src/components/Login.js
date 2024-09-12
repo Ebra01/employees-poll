@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Login() {
   const [selectedUser, setSelectedUser] = useState('');
   const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogin = (e) => {
     e.preventDefault();
     if (selectedUser) {
       dispatch(setAuthedUser(selectedUser));
-      navigate('/');
+      let redirectTo = location.state?.from || '/';
+      navigate(redirectTo);
     }
   };
 
